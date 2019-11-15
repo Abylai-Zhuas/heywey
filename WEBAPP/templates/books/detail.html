@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{{book.book_title}}{% endblock %}
+
+{% block content %}
+
+	{%if latest_book_list%}
+
+		{% for a in latest_book_list %}
+			<a href="{%url 'books:detail' a.id" %}>{{a.book_title}}</a>
+		{% endfor %}
+
+	{% else %}
+		Books are not found!!! )=
+	{% endif %}
+
+{% endblock %}
