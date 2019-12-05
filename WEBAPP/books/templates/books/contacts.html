@@ -1,0 +1,47 @@
+{% extends "books/layout.html" %}
+
+{% block content %}
+    <ul>
+      <br>
+      <h2><li>
+        Contacts</li></h2>
+        <h4><li>Rector`s Office: +7(727) 330 85 60</li>
+
+        <li>Selection committee: </li>
+        <ol>
+          <li>+7(727) 320-00-00</li>
+          <li>+7(727) 320-00-01</li>
+          <li>+7(727) 244-83-74</li>
+          <li>+7(727) 244-83-75</li>
+        </ol>
+        <li>E-mail: info@iitu.kz</li>
+        </h4>
+    </ul>
+    <style>
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 300px;  /* The height is 400 pixels */
+        width: 50%;  /* The width is the width of the web page */
+       }
+    </style>
+    <h3>Our Geolocation</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <script>
+// Initialize and add the map
+
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: 43.235189,  lng: 76.909868};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 18, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+  var marker2 = new google.maps.Marker({position: {lat:45, lng: 80}, map: map});
+}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_gmnRRAAhsxH-0l3yfXB45b62Jfz8DVs&callback=initMap">
+    </script>
+{% endblock %}

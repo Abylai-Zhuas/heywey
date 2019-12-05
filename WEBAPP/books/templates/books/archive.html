@@ -1,0 +1,15 @@
+{% extends "books/layout.html" %}
+
+{% block content %}
+{% if context %}
+{% for book in context %}
+<ul>
+  <br>
+  <li><a href="{% url 'books:book' book.id %}"> {{book.book_name}} {{book.book_date}}</a></li>
+</ul>
+
+{% endfor %}
+{% else %}
+<p> "No books available" </p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "books/layout.html"%}
+
+{% block content %}
+  {% if search_res %}
+  <br>
+    {% for book in search_res%}
+      <ol>
+        <li value="{{forloop.counter}}">
+          <a href="{% url 'books:book' book.id %}">
+          <p>{{book.book_name}}</p>
+        </a>
+        {{book.book_text|truncatewords:10}}
+        </li>
+      </ol>
+      {%endfor%}
+    {% else %}
+      {{empty_res}}
+    {% endif %}
+{% endblock%}
