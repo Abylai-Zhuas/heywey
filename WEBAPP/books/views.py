@@ -17,29 +17,29 @@ def book(request, book_id):
 	art = get_object_or_404(Book, pk = book_id)
 	art.numberOfClicks += 1
 	art.save()
-	comments = showComments(request, book_id)
+	comment = showComments(request, book_id)
 
 	if request.method == "POST":
 		try:
-			txt = request.POST.get('comments_text')
+			txt = request.POST.get('comment_text')
 			print(request.POST)
 			comment	= Comments(comment_text = txt,
 								book = Book.objects.get(pk = book_id), user = SimpleUser.objects.get(username = request.POST['username']))
 			comment.save()
 		except:
 			print('The comment can\'t be added')
-	return render(request, "books/book.html", {"book": art, "comments" : comments})
+	return render(request, "books/book.html", {"book": art, "comment" : comment})
 
 def search(request):
-	try:
-		if request.method == "POST":
-			book_title = request.POST.get("search_field")
-            if len(book_title)>0:
-                search_res = Book.objects.filter(book_title__contains = book_title)
-            return render(request, "books/search.html",
-                        {"search_res":search_res,"empty_res":"There is no book"})
+    try:
+        if request.method=="POST":
+            text_for_search = request.POST.get("search_field")
+            if len(text_for_search)>0:
+                search_res = Book.objects.filter(description__contains=text_for_search)
+            return render(request, "search.html",
+                        {"search_res":search_res,"empty_res":"There is no product"})
     except:
-        return render(request, "books/search.html",{"empty_res":"There is no book"})
+        return render(request, "search.html",{"empty_res":"There is no product"})
  
 def archive(request):
     context = Book.objects.all()

@@ -32,7 +32,7 @@
 {%if user%}
 <p>{{user}}</p>
 {%endif%}
-<center><form class="" action="{% url 'myFirstApp:registration' %}" method="post">
+<center><form class="" action="{% url 'books:registration' %}" method="post">
   {% csrf_token%}
   <table border=1>
   <tr>

@@ -20,14 +20,14 @@
       <h3>Comments: </h3>
       {% if comments %}
       {% for comment in comments %}
-        <p> {{comment.comments_text}}</p>
+        <p> {{comment.comment_text}}</p>
       {% endfor %}
       {% else %}
         <p>No comments on this article yet</p>
       {% endif %}
       <form class="" action="{% url 'books:addComment' book_id %}" method="post">
         {% csrf_token %}
-        <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>
+        <textarea name="comment_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>
         <input type="submit" name="" value="Submit">
       </form>
 

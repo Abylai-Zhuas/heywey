@@ -20,6 +20,7 @@ class Book(models.Model):
     editor_id = models.ForeignKey(Editor, on_delete = models.CASCADE)
     book_genre = models.TextField('Genre of book')
     numberOfClicks = models.IntegerField(default = 0)
+    book_image = models.ImageField(upload_to = 'archive/', default = 'NULL')
 
     def __str__(self):
     	return self.book_title
