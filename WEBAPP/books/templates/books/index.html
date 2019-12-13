@@ -37,15 +37,6 @@
     </div>
 </div>
 <!-- /.row -->
-<div>
-    <section id="slideshow">
-        <div class="entire-content">
-            <div class="content-carrousel">
-                <figure class="shadow"><img src="{{book.book_image.url}} width=150" height="200" /></figure>
-            </div>
-        </div>
-    </section>
-</div>
 <!-- POPULAR BOOKS -->
 {% if popular_books %}
 {% for book in popular_books %}
@@ -59,6 +50,15 @@
         </h3>
         <p>{{book.numberOfClicks}}</p>
     </div>
+    <!-- <div>
+    <section id="slideshow">
+        <div class="entire-content">
+            <div class="content-carrousel">
+                <figure class="shadow"><img src="{{book.book_image.url}} width=150" height="200" /></figure>
+            </div>
+        </div>
+    </section>
+</div> -->
     {% endfor %}
     {% else %}
       <p> "No available books" </p>

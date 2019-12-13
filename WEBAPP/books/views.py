@@ -11,7 +11,7 @@ from django.utils.text import slugify
 
 def index(request):
 	latest_books_list = Book.objects.order_by('-pub_date')[:5]
-	popular_books = Book.objects.filter(numberOfClicks__gt = 3).order_by('-numberOfClicks')[:3]
+	popular_books = Book.objects.filter(numberOfClicks__gt = 8).order_by('-numberOfClicks')[:4]
 	return render(request, 'books/index.html', {'latest_books_list' : latest_books_list,
 												'popular_books' : popular_books})
 
