@@ -19,7 +19,7 @@ class CustomizedAdmin(UserAdmin):
     )
     
 admin.site.register(Book)
-admin.site.register(Comment)
+admin.site.register(Comments)
 admin.site.register(Editor)
 admin.site.register(Ads)
 admin.site.register(SimpleUser,CustomizedAdmin)

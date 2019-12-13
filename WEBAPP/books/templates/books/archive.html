@@ -5,7 +5,7 @@
 {% for book in context %}
 <ul>
   <br>
-  <li><a href="{% url 'books:book' book.id %}"> {{book.book_name}} {{book.book_date}}</a></li>
+  <li><a href="{% url 'books:book' book.id %}"> <img src="{{book.book_image.url}}" width="150" height="200"> {{book.book_author}}: {{book.book_title}} {{book.book_date}}</a></li>
 </ul>
 
 {% endfor %}

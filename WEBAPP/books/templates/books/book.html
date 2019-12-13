@@ -1,9 +1,10 @@
 {% extends "books/layout.html" %}
 
 {% block content %}
-<h2>{{ book.book_name }}</h2>
+<h2><img src="{{book.book_image.url}}"> {{ book.book_author}}: {{ book.book_title }}</h2>
 <ul>
     <li> {{book.book_text|linebreaks}} </li>
+    <a download href="{{book.book_content.url}}">Download</a>
 </ul>
 <br>
 <p>
@@ -13,11 +14,11 @@
   {% if comments %}
   {% for comment in comments %}
   <p><b>*{{comment.user.username}}* left this comment: </b></p>
-    <p> {{comment.comment_text}}</p>
+    <p> {{comment.comments_text}}</p>
 
   {% endfor %}
   {% else %}
-    <p>No comments on this article yet</p>
+    <p>No comments on this book yet</p>
   {% endif %}
 
   <form class="" action="" method="post">

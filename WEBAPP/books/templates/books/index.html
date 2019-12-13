@@ -16,16 +16,16 @@
 <div class="row">
     <div class="col-md-3 portfolio-item">
         <a href="{% url 'books:book' book.id%}">
-            <img class="img-responsive" src="{% static 'books/imgs/1.jpg'%}" alt="">
+            <img class="img-responsive" src="{{book.book_image.url}}" alt="">
         </a>
         <h3>
-            <a href="{% url 'books:book' book.id%}">{{book.book_name}}</a>
+            <a href="{% url 'books:book' book.id%}">{{book.book_author}}: {{book.book_title}}</a>
         </h3>
         <p>{{book.book_text|truncatewords:10}}</p>
     </div>
     {% endfor %}
     {% else %}
-      <p> "No available books" </p>
+      <p>  </p>
     {% endif %}
 </div>
 <!-- /.row -->
@@ -37,17 +37,25 @@
     </div>
 </div>
 <!-- /.row -->
-
-<!-- POPULAR ARTICLES -->
+<div>
+    <section id="slideshow">
+        <div class="entire-content">
+            <div class="content-carrousel">
+                <figure class="shadow"><img src="{{book.book_image.url}} width=150" height="200" /></figure>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- POPULAR BOOKS -->
 {% if popular_books %}
 {% for book in popular_books %}
 <div class="row">
     <div class="col-md-3 portfolio-item">
         <a href="{% url 'books:book' book.id%}">
-            <img class="img-responsive" src="{% static 'books/imgs/2.jpg'%}" alt="" height="">
+            <img class="img-responsive" src="{{book.book_image.url}}" alt="" width="150" height="200">
         </a>
         <h3>
-            <a href="{% url 'books:book' book.id%}">{{book.book_name|truncatewords:5}}</a>
+            <a href="{% url 'books:book' book.id%}">{{book.book_title|truncatewords:5}}</a>
         </h3>
         <p>{{book.numberOfClicks}}</p>
     </div>

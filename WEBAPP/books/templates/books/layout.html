@@ -54,9 +54,6 @@
                         <a href="{% url 'books:contacts' %}">Contacts</a>
                     </li>
                     <li>
-                        <a href="{% url 'books:index' %}">Home</a>
-                    </li>
-                    <li>
                       <br>
                       <form class="" action="{%url 'books:search'%}" method="post">
                         {% csrf_token %}
