@@ -14,4 +14,5 @@ urlpatterns = [
     path('', auth_login, name = "login"),
     path("register", views.registerView.as_view(), name = "registration"),
     path("user/", views.profile, name = "profile"),
+    path('' , views.download, name = "download"),
 ]

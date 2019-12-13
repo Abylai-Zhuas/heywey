@@ -20,7 +20,8 @@ class Book(models.Model):
     editor_id = models.ForeignKey(Editor, on_delete = models.CASCADE)
     book_genre = models.TextField('Genre of book')
     numberOfClicks = models.IntegerField(default = 0)
-    book_image = models.ImageField(upload_to = 'archive/', default = 'NULL')
+    book_image = models.ImageField(upload_to = 'archive', default = 'NULL')
+    book_content = models.FileField(upload_to = 'media', default = 'NULL')
 
     def __str__(self):
     	return self.book_title
@@ -41,10 +42,10 @@ class SimpleUser(AbstractUser):
     def __str__(self):
         return self.username
 
-class Comment(models.Model):
+class Comments(models.Model):
     book = models.ForeignKey(Book, on_delete = models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete = models.CASCADE)
-    comment_text = models.TextField('Text of comment')
+    comments_text = models.TextField('Text of comment')
 
     def __str__(self):
     	return self.comment_text

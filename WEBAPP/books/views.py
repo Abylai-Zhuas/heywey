@@ -1,10 +1,12 @@
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect, FileResponse
 from .models import *
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.views.generic.edit import CreateView
 from .forms import *
+from django.utils.text import slugify
+
 
 
 def index(request):
@@ -17,29 +19,29 @@ def book(request, book_id):
 	art = get_object_or_404(Book, pk = book_id)
 	art.numberOfClicks += 1
 	art.save()
-	comment = showComments(request, book_id)
+	comments = showComments(request, book_id)
 
 	if request.method == "POST":
 		try:
-			txt = request.POST.get('comment_text')
+			txt = request.POST.get('comments_text')
 			print(request.POST)
-			comment	= Comments(comment_text = txt,
+			comment	= Comments(comments_text = txt,
 								book = Book.objects.get(pk = book_id), user = SimpleUser.objects.get(username = request.POST['username']))
 			comment.save()
 		except:
 			print('The comment can\'t be added')
-	return render(request, "books/book.html", {"book": art, "comment" : comment})
+	return render(request, "books/book.html", {"book": art, "comments" : comments})
 
 def search(request):
     try:
         if request.method=="POST":
-            text_for_search = request.POST.get("search_field")
-            if len(text_for_search)>0:
-                search_res = Book.objects.filter(description__contains=text_for_search)
-            return render(request, "search.html",
+            book_title = request.POST.get("search_field")
+            if len(book_title)>0:
+                search_res = Book.objects.filter(book_title__contains = book_title)
+            return render(request, "books/search.html",
                         {"search_res":search_res,"empty_res":"There is no product"})
     except:
-        return render(request, "search.html",{"empty_res":"There is no product"})
+        return render(request, "books/search.html",{"empty_res":"There is no product"})
  
 def archive(request):
     context = Book.objects.all()
@@ -47,8 +49,8 @@ def archive(request):
 
 def addComment(request, book_id):
     try:
-        txt = request.POST.get("comment_text")
-        comment = Comments(comment_text = txt,
+        txt = request.POST.get("comments_text")
+        comment = Comments(comments_text = txt,
                             book = Book.objects.get(pk = book_id))
         comment.save()
         return render(request, "books/book.html",
@@ -73,3 +75,13 @@ class registerView(CreateView):
 
 def contacts(request):
     return render(request, "books/contacts.html")
+
+def download(request, book_id):
+    item = get_object_or_404(book_content, pk=book_id)
+    file_name, file_extension = os.path.splitext(item.file.file.name)
+    file_extension = file_extension[1:] # removes dot
+    response = FileResponse(item.file.file, 
+        content_type = "file/%s" % file_extension)
+    response["Content-Disposition"] = "attachment;"\
+        "filename=%s.%s" %(slugify(item.file.name)[:100], file_extension)
+    return response

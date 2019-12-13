@@ -7,7 +7,7 @@
       <ol>
         <li value="{{forloop.counter}}">
           <a href="{% url 'books:book' book.id %}">
-          <p>{{book.book_name}}</p>
+          <p><img src="{{book.book_image.url}}"> {{book.book_title}}</p>
         </a>
         {{book.book_text|truncatewords:10}}
         </li>
