@@ -42,7 +42,11 @@ def search(request):
                         {"search_res":search_res,"empty_res":"There is no product"})
     except:
         return render(request, "books/search.html",{"empty_res":"There is no product"})
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> 6e16ce6f8027f9fdd4fbf376e69b295fa5b9d8b1
 def archive(request):
     context = Book.objects.all()
     return render(request, "books/archive.html", {"context":context})

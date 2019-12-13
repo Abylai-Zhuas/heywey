@@ -23,7 +23,7 @@
 
   <form class="" action="" method="post">
     {% csrf_token %}
-    <textarea name="comments_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>
+    <textarea name="comment_text" rows="8" cols="80" placeholder="Leave your thoughts"></textarea>
     <input type="hidden" name="username" value="{{user.username}}">
     <br><input type="submit" name="" value="Submit">
   </form>
